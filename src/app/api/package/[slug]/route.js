@@ -7,7 +7,11 @@ export async function GET(req, res) {
       const pathname = req.nextUrl.pathname;
     const id = pathname.split("/")[3];
       const packagedesc = await PackageDesc.findById(id);
-      const response = NextResponse.json(packagedesc);
+     const response = NextResponse.json({
+        message: "Blog created successfully!",
+        success: true,
+        data: packagedesc
+      });
       return response;
     } catch (error) {
       console.log(error.message);

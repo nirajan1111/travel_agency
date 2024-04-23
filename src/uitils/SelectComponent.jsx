@@ -1,7 +1,7 @@
 "use client"
 import useCustomSelect from "@/hooks/useCustomSelect";
 import React, { useEffect, useRef } from "react";
-const SelectComponent = ({ options, placeholder, open, customClass }) => {
+const SelectComponent = ({ options, type,placeholder, open, customClass, setValue }) => {
   const {
     isOpen,
     selectedOption,
@@ -49,15 +49,16 @@ const SelectComponent = ({ options, placeholder, open, customClass }) => {
           <li
             key={index}
             className={`option${
-              selectedOption === option ? " selected focus" : ""
+              selectedOption === option[type] ? " selected focus" : ""
             }`}
             data-value={index}
             onClick={() => {
-              selectOption(option);
+              setValue(option._id);
+              selectOption(option[type]);
               openDropdown(); // Open the next dropdown
             }}
           >
-            {option}
+            {option[type]}
           </li>
         ))}
       </ul>

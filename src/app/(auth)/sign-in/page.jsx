@@ -23,7 +23,7 @@ const RegisterForm = () => {
       const signInResponse = await signIn("credentials", {
         email: formData.email,
         password: formData.password,
-        callbackUrl: "/admindashboard",
+        callbackUrl: "/admin-dashboard",
       });
       if(signInResponse===null){
         router.push('/sign-in')
@@ -32,7 +32,7 @@ const RegisterForm = () => {
       console.log(signInResponse);
 
       if (!signInResponse.error) {
-        router.push("/admindashboard");
+        router.push("/admin-dashboard");
       } else {
         router.push(router.asPath);
 

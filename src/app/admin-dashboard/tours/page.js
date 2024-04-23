@@ -1,14 +1,55 @@
+"use client"
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const Page = () => {
+  const [packageData, setPackageData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      const response = await fetch("/api/package");
+      const packageResponse = await response.json();
+      console.log("products data ", packageResponse.data);
+      setLoading(false);
+      setPackageData(packageResponse.data || []);
+    };
+
+    fetchData();
+  }, []);
+  const PackageBody = ({ data }) => {
+    return (
+      <tr>
+        <td data-label="Heading">
+          <div className="product-name">
+            <div className="product-content">
+              <h6>{data.heading}</h6>
+            </div>
+          </div>
+        </td>
+        <td data-label="Paragraph">{data.price}</td>
+        <td data-label="Paragraph">{data.duration}</td>
+        <td data-label="Paragraph">{data.activity}</td>
+      </tr>
+    );
+  };
   return (
     <div className="row">
       <div className="col-xl-12">
         <div className="recent-listing-area">
           <div className="row mb-4">
             <div className="col-xl-6">
-              <h2 className="fs-30">Contact</h2>
+              <h2 className="fs-30">Tour Information</h2>
+            </div>
+            <div className="col-xl-6 d-flex justify-content-end">
+              <Link
+                href="/admin-dashboard/tours/new"
+                className="primary-btn1 two"
+              >
+                Add Tours
+              </Link>
             </div>
           </div>
 
@@ -17,34 +58,15 @@ const Page = () => {
               <thead>
                 <tr>
                   <th>Heading</th>
-                  <th>Paragraph</th>
+                  <th>Price</th>
+                  <th>duration</th>
+                  <th>activity</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td data-label="Heading">
-                    <div className="product-name">
-                      <div className="img">
-                        <img
-                          src="/assets/img/home1/package-card-img1.png"
-                          alt=""
-                        />
-                      </div>
-                      <div className="product-content">
-                        <h6>
-                          <a href="#">
-                            Explore Travel NYC's Museums, Diversity,
-                          </a>
-                        </h6>
-                      </div>
-                    </div>
-                  </td>
-                  <td data-label="Paragraph">
-                    This is the name of the tour this is how it should be
-                    defined and nothing more this is so cool heading looks so
-                    fine
-                  </td>
-                </tr>
+                {packageData.map((pack) => (
+                  <PackageBody data={pack} />
+                ))}
               </tbody>
             </table>
             <div className="pagination-area">

@@ -6,7 +6,9 @@ import { connect } from "@/uitils/db.js";
 
 export async function GET(req, res) {
   try {
+    await connect()
     const landings = await Landing.find();
+    console.log(landings);
     const response = NextResponse.json({
       message: "All landing",
       success: true,
@@ -28,6 +30,7 @@ export async function POST(req, res) {
       paragraph: paragraph,
       image: image,
     });
+    console.log(image)
 
     await landing.save();
 

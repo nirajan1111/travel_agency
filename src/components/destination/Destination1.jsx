@@ -1,7 +1,27 @@
+'use client'
 import Link from "next/link";
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const Destination1 = () => {
+  const [destinationData, setDestinationData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+
+
+  useEffect(() => {
+
+    const fetchData = async () => {
+      setLoading(true);
+      const response = await axios.get("/api/destination");
+      console.log("destination data ", response.data.data);
+      setLoading(false);
+      setDestinationData(response.data.data || []);
+    };
+    fetchData();
+  }, []);
+
+
   return (
     <>
       <div className="home1-destination-section mb-120">
@@ -46,95 +66,39 @@ const Destination1 = () => {
             </div>
           </div>
           <div className="row g-4">
-            <div className="col-lg-3 col-sm-6">
-              <div className="destination-card">
-                <img src="/assets/img/home1/destination-card-img1.jpg" alt="" />
-                <div className="overlay" />
-                <div className="card-title">
-                  <h4>Brazil</h4>
-                </div>
-                <div className="content">
-                  <h4>
-                    <Link href="/destination/destination-details">Brazil</Link>
-                  </h4>
-                  <div className="eg-tag">
-                    <span>50 Tour</span>
+
+            {
+              destinationData.map((destination,index) => (
+                (
+
+                  <div className="col-lg-4 col-sm-6" key={index}>
+                    <div className="destination-card">
+                      <img src={destination.image} alt="" />
+                      <div className="overlay" />
+                      <div className="card-title">
+                        <h4>{destination.name}</h4>
+                      </div>
+                      <div className="content">
+                        <h4>
+                          <Link href="/destination/destination-details">
+                          {destination.name}
+                          </Link>
+                        </h4>
+                        <div className="eg-tag">
+                          <span>{destination.tourCount}</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-5 col-sm-6">
-              <div className="destination-card">
-                <img src="/assets/img/home1/destination-card-img2.jpg" alt="" />
-                <div className="overlay" />
-                <div className="card-title">
-                  <h4>Italy</h4>
-                </div>
-                <div className="content">
-                  <h4>
-                    <Link href="/destination/destination-details">Italy</Link>
-                  </h4>
-                  <div className="eg-tag">
-                    <span>30 Tour</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-4 col-sm-6">
-              <div className="destination-card">
-                <img src="/assets/img/home1/destination-card-img3.jpg" alt="" />
-                <div className="overlay" />
-                <div className="card-title">
-                  <h4>New York</h4>
-                </div>
-                <div className="content">
-                  <h4>
-                    <Link href="/destination/destination-details">
-                      New York
-                    </Link>
-                  </h4>
-                  <div className="eg-tag">
-                    <span>30 Tour</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-5 col-sm-6">
-              <div className="destination-card">
-                <img src="/assets/img/home1/destination-card-img4.jpg" alt="" />
-                <div className="overlay" />
-                <div className="card-title">
-                  <h4>Saudi Arab</h4>
-                </div>
-                <div className="content">
-                  <h4>
-                    <Link href="/destination/destination-details">
-                      Saudi Arab
-                    </Link>
-                  </h4>
-                  <div className="eg-tag">
-                    <span>30 Tour</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-3 col-sm-6">
-              <div className="destination-card">
-                <img src="/assets/img/home1/destination-card-img5.jpg" alt="" />
-                <div className="overlay" />
-                <div className="card-title">
-                  <h4>Europe</h4>
-                </div>
-                <div className="content">
-                  <h4>
-                    <Link href="/destination/destination-details">Europe</Link>
-                  </h4>
-                  <div className="eg-tag">
-                    <span>50 Tour</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+                )
+              ))
+            }
+
+
+
+
+
+
             <div className="col-lg-4 col-sm-6">
               <div className="destination-banner">
                 <div className="destination-banner-content">

@@ -1,68 +1,21 @@
 import mongoose from "mongoose";
 const packageSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true,
-  },
-  backgroundImage: {
-    type: String,
-    required: true,
-  },
-  images: [
+  heading: { type: String, required: true },
+  price: { type: String, required: true },
+  duration: { type: String, required: true },
+  activity: { type: String, required: true },
+  destination: { type: mongoose.Schema.Types.ObjectId, ref: "tours", required: true },
+  overview: { type: String, required: true },
+  included: [{ type: String }],
+  excluded: [{ type: String }],
+  highlights: [{ type: String }],
+  itinerary: [
     {
-      type: String,
+      title: { type: String, required: true },
+      paragraph: { type: String, required: true },
     },
   ],
-  duration: {
-    type: String,
-    required: true,
-  },
-  activity: {
-    type: String,
-    required: true,
-  },
-  bestSeason: {
-    type: String, 
-    required: true,
-  },
-  accomodation: {
-    type: String,
-    required: true,
-  },
-  destination: {
-    type: String, 
-    required: true,
-  },
-  difficulty: {
-    type: String, 
-    required: true,
-  },
-  overview:{
-    type:String, 
-    required: true,
-  },
-  costInclude:[
-    {type: String}
-  ],
-  costExclude:[
-    {
-      type:String,
-    }
-  ],
-  Itinery:[
-    {
-      name: {type: String},
-      description: {type: String},
-    }
-  ],
-  price: {
-    type: String,
-    required: true,
-  },
-  place_list: {
-    type: [String],
-    required: true,
-  },
+  image: { type: String, required: true },
 });
 
 const PackageDesc =

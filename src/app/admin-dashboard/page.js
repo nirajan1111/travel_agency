@@ -6,8 +6,9 @@ import "../../../public/assets/css/dashboard.css";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 const Page = () => {
+  const {session} = useSession();
+
   const handleContainerClick = (event) => {
-    const {session} = useSession();
     console.log("session is",session);
     const target = event.target;
 

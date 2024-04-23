@@ -1,6 +1,48 @@
-import React from "react";
+'use client'
+import React, { useState } from "react";
+import axios from "axios";
 
-const page = () => {
+const ContactPage = () => {
+  const [formData, setContactData] = useState({
+    name: "",
+    email: "",
+    message: "",
+    phone: "",
+  });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+
+  
+  const nameChange=(e)=>{
+    setContactData({ ...formData, name: e.target.value });
+  }
+  const emailChange=(e)=>{
+    setContactData({ ...formData, email: e.target.value });
+  }
+  const messageChange=(e)=>{
+    setContactData({ ...formData, message: e.target.value });
+  }
+  const phoneChange=(e)=>{
+    setContactData({ ...formData, phone: e.target.value });
+  }
+  const handleSubmit = async () => {
+    try {
+      if (formData.name && formData.email && formData.message) {
+        setLoading(true);
+        console.log("contact data ", formData);
+        const response = await axios.post("/api/contact", formData);
+        console.log("contact data ", response.data);
+        setLoading(false);
+      } else {
+        setError(true);
+      }
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+      setError(true);
+    }
+  };
+
   return (
     <>
       <div className="contact-page pt-120 mb-120">
@@ -126,24 +168,24 @@ const page = () => {
             <div className="col-lg-7">
               <div className="contact-form-area">
                 <h3>Reach Us Anytime</h3>
-                <form>
+                <form onSubmit={handleSubmit}>
                   <div className="row">
                     <div className="col-lg-12 mb-20">
                       <div className="form-inner">
                         <label>Name*</label>
-                        <input type="text" placeholder="Daniel Scoot" />
+                        <input type="text" placeholder="Daniel Scoot" value={formData.name} onChange={nameChange} required/>
                       </div>
                     </div>
                     <div className="col-lg-6 mb-20">
                       <div className="form-inner">
                         <label>Phone</label>
-                        <input type="text" placeholder="Phone Number..." />
+                        <input type="number" placeholder="Phone Number..." value={formData.phone} onChange={phoneChange} required/>
                       </div>
                     </div>
                     <div className="col-lg-6 mb-20">
                       <div className="form-inner">
                         <label>Email</label>
-                        <input type="email" placeholder="Email Us...." />
+                         <input type="email" placeholder="Email Us...." value={formData.email} onChange={emailChange} required/>
                       </div>
                     </div>
                     <div className="col-lg-12 mb-30">
@@ -152,6 +194,8 @@ const page = () => {
                         <textarea
                           placeholder="What’s on your mind"
                           defaultValue={""}
+                          onChange={messageChange}
+                          required
                         />
                       </div>
                     </div>
@@ -174,55 +218,13 @@ const page = () => {
       </div>
 
       <div className="contact-map">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3649.5647631857846!2d90.36311167605992!3d23.83407118555764!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c14c8682a473%3A0xa6c74743d52adb88!2sEgens%20Lab!5e0!3m2!1sen!2sbd!4v1700138349574!5m2!1sen!2sbd"
-          allowFullScreen
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-        />
-        <div className="banner3-section">
-          <div className="container">
-            <div className="row">
-              <div className="col-lg-12">
-                <div className="banner3-content">
-                  <h2>Join The Newsletter</h2>
-                  <p>To receive our best monthly deals</p>
-                  <form>
-                    <div className="from-inner">
-                      <input type="email" placeholder="Enter Your Gmail..." />
-                      <button type="submit" className="from-arrow">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width={18}
-                          height={17}
-                          viewBox="0 0 18 17"
-                        >
-                          <path
-                            d="M7 1L16 8.5M16 8.5L7 16M16 8.5H0.5"
-                            strokeWidth="1.5"
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                  </form>
-                  <img
-                    src="/assets/img/home1/banner3-vector1.png"
-                    alt=""
-                    className="vector1"
-                  />
-                  <img
-                    src="/assets/img/home1/banner3-vector2.png"
-                    alt=""
-                    className="vector2"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3533.1744531339273!2d85.32008641067894!3d27.68100252655429!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6d1459628afce367%3A0xcd1790e1c5801e86!2sNebulaLeap%20Technology%20Pvt.%20Ltd!5e0!3m2!1sen!2snp!4v1713337699900!5m2!1sen!2snp" 
+         allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        
       </div>
     </>
   );
 };
 
-export default page;
+export default ContactPage;

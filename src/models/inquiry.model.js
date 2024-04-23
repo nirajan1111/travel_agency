@@ -5,6 +5,7 @@ const inquirySchema = new Schema({
   email: { type: String, required: true },
   number: { type: String, required: true },
   message: { type: String, required: true },
+  id: { type: String, required: true },
 });
 const Inquiry =
   mongoose.models.inquiry || mongoose.model("inquiry", inquirySchema);

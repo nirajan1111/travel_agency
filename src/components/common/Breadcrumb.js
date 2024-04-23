@@ -7,7 +7,7 @@ const Breadcrumb = ({ pagename, pagetitle }) => {
       className="breadcrumb-section"
       style={{
         backgroundImage:
-          "linear-gradient(270deg, rgba(0, 0, 0, .3), rgba(0, 0, 0, 0.3) 101.02%), url(/assets/img/innerpage/inner-banner-bg.png)",
+          "linear-gradient(270deg, rgba(0, 0, 0, .3), rgba(0, 0, 0, 0.3) 101.02%), url(/assets/img/Mount-Everest.png)",
       }}
     >
       <div className="container">

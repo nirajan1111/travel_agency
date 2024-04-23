@@ -33,13 +33,18 @@ export async function POST(req, res) {
   try {
     await connect();
 
-    const { name, email, number, message } = await req.json();
+    const { name, email, number, message,id } = await req.json();
+    console.log(name,email,number,message,id)
+    if(!name || !email || !number || !message || !id){
+      return NextResponse.json({ error: "All fields are required" }, { status: 400 });
+    }
 
     const inquiry = new Inquiry({
       name,
       email,
       number,
       message,
+      id
     });
 
     await inquiry.save();

@@ -1,60 +1,57 @@
+'use client'
 import Link from "next/link";
 import React from "react";
 
 const Page = () => {
+  const [inquiries, setInquiries] = React.useState([]);
+  React.useEffect(() => {
+    fetch("/api/inquiry")
+      .then((res) => res.json())
+      .then((data) => {
+        setInquiries(data.data);
+      });
+  }, []);
   return (
     <div className="row">
       <div className="col-xl-12">
         <div className="recent-listing-area">
           <div className="row mb-4">
             <div className="col-xl-6">
-              <h2 className="fs-30">Blogs Info</h2>
-            </div>
-            <div className="col-xl-6 d-flex justify-content-end">
-              <Link
-                href="/admin-dashboard/blogs/new"
-                className="primary-btn1 two"
-              >
-                Add Blogs
-              </Link>
+              <h2 className="fs-30">Inquiry Information</h2>
             </div>
           </div>
 
           <div className="recent-listing-table">
-            <table className="eg-table2">
-              <thead>
-                <tr>
-                  <th>Heading</th>
-                  <th>Paragraph</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td data-label="Heading">
-                    <div className="product-name">
-                      <div className="img">
-                        <img
-                          src="/assets/img/home1/package-card-img1.png"
-                          alt=""
-                        />
-                      </div>
-                      <div className="product-content">
-                        <h6>
-                          <a href="#">
-                            Explore Travel NYC's Museums, Diversity,
-                          </a>
-                        </h6>
-                      </div>
-                    </div>
-                  </td>
-                  <td data-label="Paragraph">
-                    This is the name of the tour this is how it should be
-                    defined and nothing more this is so cool heading looks so
-                    fine
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <div className="table-responsive">
+              <table className="eg-table2">
+                <thead>
+                  <tr>
+                  <th>S.N.</th>
+                    <th>name</th>
+                    <th>email</th>
+                    <th>number</th>
+                    <th>message</th>
+                    <th>package</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {inquiries.map((inquiry, index) => (
+                    <tr key={index+1}>
+                    <td>{index}</td>
+                    <td data-label="name">{inquiry.name}</td>
+                      <td data-label="email">{inquiry.email}</td>
+                      <td data-label="number">{inquiry.number}</td>
+                      <td data-label="message" className="wrap-text">{inquiry.message}</td>
+                      <td data-label="package">
+                        <a href={`/package/${inquiry.id}`}>
+                          <a className="btn btn-primary">View</a>
+                        </a>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
             <div className="pagination-area">
               <ul className="paginations">
                 <li className="page-item active">

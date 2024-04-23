@@ -1,13 +1,17 @@
 "use client";
 import React, { useState } from "react";
-import { UploadButton } from "@/uitils/uploadthing";
+// import { UploadButton } from '@uploadthing/react';
 import SelectComponent from "@/uitils/SelectComponent";
+import { UploadButton } from "@/uitils/uploadthing";
 const Page = () => {
-  const [name, setName] = useState("");
+  const [heading, setHeading] = useState("");
+  const [paragraph, setParagraph] = useState("");
   const [file, setFile] = useState("");
   const [isComplete, setIsComplete] = useState(false);
 
+
   const handleUpload = async (e) => {
+    
     e.preventDefault();
     // Send the selected file to the server-side for further processing
     if (!isComplete) {
@@ -16,13 +20,13 @@ const Page = () => {
     }
 
     const bodyJson = {
-      name: name,
+      heading: heading,
+      paragraph: paragraph,
       image: file,
-    };
-    console.log(bodyJson)
+    }
 
     try {
-      const response = await fetch("/api/destination", {
+      const response = await fetch("/api/landing", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(bodyJson),
@@ -48,35 +52,43 @@ const Page = () => {
             >
               <div className="dashboard-profile-tab-content">
                 <div className="profile-tab-content-title">
-                  <h6>Destination details</h6>
+                  <h6>Landing details</h6>
                 </div>
                 <form>
                   <div className="row">
                     <div className="col-xl-12">
                       <div className="form-inner mb-30">
-                        <label>Name</label>
+                        <label>Heading</label>
                         <input
                           type="text"
                           placeholder="Example: Beyond horizon"
-                          value={name}
-                          onChange={(e)=>setName(e.target.value)}
+                          value={heading}
+                          onChange={(e) => setHeading(e.target.value)}
                         />
+                      </div>
+                    </div>
+                    <div className="col-xl-12">
+                      <div className="form-inner mb-30">
+                        <label>Paragraph</label>
+                        <textarea
+                          type="text"
+                          placeholder="Add the description /paragraph"
+                          value={paragraph}
+                          onChange={(e) => setParagraph(e.target.value)}
+                        ></textarea>
                       </div>
                     </div>
                   </div>
                   <div className="upload-img-area">
-                    <div
-                      className="upload-img-wrapper"
-                      style={{ marginRight: "20px" }}
-                    >
+                    <div className="upload-img-wrapper">
                       <div className="drag-area">
-                        {/* <button type="button" className="upload-btn">
+                        <button type="button" className="upload-btn">
                           <i className="bi bi-plus-lg" />
-                        </button> */}
+                        </button>
                         <UploadButton
                           endpoint="imageUploader"
                           onClientUploadComplete={(res) => {
-                            // Do something with the response
+
                             console.log("Files: ", res);
                             setFile(res[0].url);
                             setIsComplete(true);
@@ -90,17 +102,18 @@ const Page = () => {
                     </div>
                     <div className="upload-img-area-content">
                       <h6>Upload Your Image</h6>
-                      <p>Image required size 648*792, JPGE or PNG format.</p>
+                      <p>Image required size 1780*828, JPGE or PNG format.</p>
                     </div>
                   </div>
 
                   <div className="form-inner">
+                    {/* <UploadButton  disabled={!file} className='primary-btn3 h-12 w-12'/> */}
                     <button
                       type="submit"
                       className="primary-btn3"
                       onClick={handleUpload}
                     >
-                      Add Destination
+                      Add landing
                     </button>
                   </div>
                 </form>

@@ -6,7 +6,7 @@ export default withAuth(
   {
     callbacks: {
       authorized: ({ req, token }) => {
-        if (req.nextUrl.pathname === '/admindashboard') {
+        if (req.nextUrl.pathname === '/admin-dashboard') {
           console.log(token)
           return token?.isAdmin
         }
@@ -14,5 +14,5 @@ export default withAuth(
     }
   })
 export const config = {
-  matcher: ["/admindashboard", "/verify/:path*"],
+  matcher: ["/admin-dashboard", "/verify/:path*","/admin-dashboard/:path*"],
 };

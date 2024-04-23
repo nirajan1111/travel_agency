@@ -1,21 +1,51 @@
 import { NextResponse } from "next/server";
 import PackageDesc from "../../../models/package.model.js";
+import Tour from "@/models/destination.model.js";
 import { connect } from "@/uitils/db.js";
-export async function POST(req,res) {
+export async function GET(req, res) {
+  try {
+    await connect();
+
+    const packages = await PackageDesc.find();
+    const response = NextResponse.json({
+      message: "Package created successfully!",
+      success: true,
+      data: packages || []
+    });
+    return response;
+  } catch (error) {
+    console.log(error.message);
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+}
+export async function POST(req, res) {
   try {
     console.log("Processing POST request")
     await connect();
-    const {batch, img, title, price, place_list} = await req.json();
+    const { heading, price, duration, activity, destination, overview, included,image,excluded, highlights, itinerary } = await req.json();
+    console.log(heading)
+    const destinationobj = await Tour.findById(destination)
+    if (!destinationobj) {
+      return NextResponse.json({ error: "Destination not found" }, { status: 404 });
+    }
+    if(!heading || !price || !duration || !activity || !destination || !overview ){
+      return NextResponse.json({ error: "All fields are required" }, { status: 400 });
+    }
 
-    console.log(batch, img, title, price, place_list);
     const PackageDescs = new PackageDesc({
-        batch,
-        img,
-        title,
-        price,
-        place_list,
+      heading,
+      price,
+      duration,
+      activity,
+      destination: destinationobj._id,
+      overview,
+      image,
+      included,
+      excluded,
+      highlights,
+      itinerary
     })
-     await  PackageDescs.save();   
+    await PackageDescs.save();
     const response = NextResponse.json({
       message: "Package created successfully!",
       success: true,
@@ -28,13 +58,13 @@ export async function POST(req,res) {
 }
 
 
-export async function DELETE(req,res) {
+export async function DELETE(req, res) {
   try {
     console.log("Processing DELETE request")
     await connect();
     const { id } = await req.json();
     const packageDesc = await PackageDesc.findById(id);
-    if(!packageDesc){
+    if (!packageDesc) {
       return NextResponse.json({ error: "Package not found" }, { status: 404 });
     }
     await packageDesc.remove();
@@ -45,19 +75,19 @@ export async function DELETE(req,res) {
 
     return response;
   }
-  catch(error){
+  catch (error) {
     console.log(error.message);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
 
-export async function PUT(req,res) {
+export async function PUT(req, res) {
   try {
     console.log("Processing PUT request")
     await connect();
     const { id, batch, img, title, price, place_list } = await req.json();
     const packageDesc = await PackageDesc.findById(id);
-    if(!packageDesc){
+    if (!packageDesc) {
       return NextResponse.json({ error: "Package not found" }, { status: 404 });
     }
     packageDesc.batch = batch;
@@ -72,7 +102,7 @@ export async function PUT(req,res) {
     });
     return response;
   }
-  catch(error){
+  catch (error) {
     console.log(error.message);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
