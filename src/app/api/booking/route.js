@@ -1,26 +1,23 @@
+import Booking from "@/models/Booking";
 import { NextResponse } from "next/server";
-import PackageDesc from "../../../models/package.model.js";
-import Destination from "../../../models/destination.model.js";
 
 import { connect } from "@/uitils/db.js";
-import Inquiry from "@/models/inquiry.model.js";
 
 export async function GET(req, res) {
   try {
     await connect();
-
-    const inquiries = await Inquiry.find();
-    if (!inquiries) {
+    const bookings = await Booking.find();
+    if (!bookings) {
       const response = NextResponse.json({
-        message: "Destination not found",
+        message: "Booking not found",
         success: false,
       });
       return response;
     }
     const response = NextResponse.json({
-      message: "Destination created successfully!",
+      message: "Booking created successfully!",
       success: true,
-      data: inquiries || [],
+      data: bookings || [],
     });
     return response;
   } catch (error) {
@@ -33,26 +30,27 @@ export async function POST(req, res) {
   try {
     await connect();
 
-    const { name, email, number, message,id } = await req.json();
-    
-    if(!name || !email || !number || !message || !id){
-      return NextResponse.json({ error: "All fields are required" }, { status: 400 });
+    const { name, email, passport, phone, persons, arrival, for_, id } = await req.json();
+    if(!name|| !email|| !id){
+        return NextResponse.json({ error: " Please Fill the fields" }, { status: 400 });
     }
-
-    const inquiry = new Inquiry({
+    const booking = new Booking({
       name,
       email,
-      number,
-      message,
+      passport,
+      phone,
+      persons,
+      arrival,
+      for_,
       id
     });
 
-    await inquiry.save();
-
+    await booking.save();
     const response = NextResponse.json({
-      message: "Inquiry created successfully!",
-      success: true,
-    });
+        message: "Booking created successfully!",
+        success: true,
+        
+    })
     return response;
   } catch (error) {
     
@@ -64,13 +62,16 @@ export async function DELETE(req, res) {
   try {
     await connect();
     const { id } = await req.json();
-    const inquiry = await Inquiry.findById(id);
-    if (!inquiry) {
-      return NextResponse.json({ error: "Inquiry not found" }, { status: 404 });
+    const booking = await Booking.findByIdAndDelete(id);
+    if (!booking) {
+      const response = NextResponse.json({
+        message: "Booking not found",
+        success: false,
+      });
+      return response;
     }
-    await inquiry.remove();
     const response = NextResponse.json({
-      message: "Inquiry deleted successfully!",
+      message: "Booking deleted successfully!",
       success: true,
     });
     return response;

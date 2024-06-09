@@ -3,9 +3,19 @@ import React, { useEffect, useState } from "react";
 
 import SelectComponent from "@/uitils/SelectComponent";
 import { UploadButton } from "@/uitils/uploadthing";
+import dynamic from "next/dynamic";
 
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+const CKEditor = dynamic(
+  () => import("@ckeditor/ckeditor5-react").then((mod) => mod.CKEditor),
+  { ssr: false } // This ensures it won't be server-side rendered
+);
+
+const ClassicEditor = dynamic(
+  () => import("@ckeditor/ckeditor5-build-classic"),
+  { ssr: false }
+);
+// import { CKEditor } from "@ckeditor/ckeditor5-react";
+// import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 const Page = () => {
   const [destination, setDestination] = useState([]);
   const [heading, setHeading] = useState('');
@@ -45,13 +55,15 @@ const Page = () => {
   };
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("/api/destination");
-      const destinationResponse = await response.json();
-
-      console.log(destinationResponse);
-      setDestination(destinationResponse.data || []);
+      try {
+        const response = await fetch("/api/destination");
+        const destinationResponse = await response.json();
+        setDestination(destinationResponse.data || []);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
     };
-
+  
     fetchData();
   }, []);
   const onSubmit = async(e) =>{
@@ -82,7 +94,7 @@ const Page = () => {
 
       const data = await response.json();
 
-      console.log("Upload response:", data); // Handle success/error messages
+      
     } catch (error) {
       console.error("Error uploading image:", error);
     }
@@ -170,8 +182,8 @@ const Page = () => {
                           }}
                           onChange={(event, editor) => {
                             const data = editor.getData();
-                            console.log('data is ',data)
-                            // console.log({ event, editor, data })
+                            
+                            // 
                             setOverview(data);
                           }}
                 
@@ -247,7 +259,7 @@ const Page = () => {
                         endpoint="imageUploader"
                         onClientUploadComplete={(res) => {
 
-                          console.log("Files: ", res);
+                          
                           setFile(res[0].url);
                           setIsComplete(true);
                         }}

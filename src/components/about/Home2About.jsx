@@ -80,7 +80,7 @@ const Home2About = () => {
                       </div>
                       <div className="content">
                         <h6>
-                          Jungle<br /> Safari
+                         Heritage Site<br /> Seeing
                         </h6>
                       </div>
                     </div>
@@ -103,7 +103,7 @@ const Home2About = () => {
                   />
                 </div>
                 <div className="experience">
-                  <h3>05</h3>
+                  <h3>03</h3>
                   <p>Years of experience</p>
                 </div>
                 <img

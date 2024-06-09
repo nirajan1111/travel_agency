@@ -21,14 +21,14 @@ const SignupModal = () => {
     setErrorMessage("");
     try {
       const response = await axios.post("http://localhost:3000/api/Users", formData);
-      console.log(response.data);
+      
       if (response.data.success) {
         router.push("/dashboard");
       } else {
         setErrorMessage(response.data.message);
       }
     } catch (error) {
-      console.log(error);
+      
     }
   };
 

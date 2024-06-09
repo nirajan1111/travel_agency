@@ -5,8 +5,12 @@ import { connect } from "@/uitils/db.js";
 export async function GET(req, res) {
   try {
     await connect();
+    const packages = await PackageDesc.find().populate("destination");
 
-    const packages = await PackageDesc.find();
+    if(!packages){
+      return NextResponse.json({ error: "No packages found" }, { status: 404 });
+    }
+    
     const response = NextResponse.json({
       message: "Package created successfully!",
       success: true,
@@ -14,16 +18,16 @@ export async function GET(req, res) {
     });
     return response;
   } catch (error) {
-    console.log(error.message);
+    
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
 export async function POST(req, res) {
   try {
-    console.log("Processing POST request")
+    
     await connect();
     const { heading, price, duration, activity, destination, overview, included,image,excluded, highlights, itinerary } = await req.json();
-    console.log(heading)
+    
     const destinationobj = await Tour.findById(destination)
     if (!destinationobj) {
       return NextResponse.json({ error: "Destination not found" }, { status: 404 });
@@ -52,7 +56,7 @@ export async function POST(req, res) {
     });
     return response;
   } catch (error) {
-    console.log(error.message);
+    
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
@@ -60,7 +64,7 @@ export async function POST(req, res) {
 
 export async function DELETE(req, res) {
   try {
-    console.log("Processing DELETE request")
+    
     await connect();
     const { id } = await req.json();
     const packageDesc = await PackageDesc.findById(id);
@@ -76,14 +80,14 @@ export async function DELETE(req, res) {
     return response;
   }
   catch (error) {
-    console.log(error.message);
+    
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
 
 export async function PUT(req, res) {
   try {
-    console.log("Processing PUT request")
+    
     await connect();
     const { id, batch, img, title, price, place_list } = await req.json();
     const packageDesc = await PackageDesc.findById(id);
@@ -103,7 +107,7 @@ export async function PUT(req, res) {
     return response;
   }
   catch (error) {
-    console.log(error.message);
+    
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

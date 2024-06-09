@@ -29,7 +29,7 @@ export async function POST(req) {
     await User.create({ email, password });
     return NextResponse.json({ message: "User Created." }, { status: 201 });
   } catch (error) {
-    console.log(err);
+    
     return NextResponse.json({ message: "Error", error }, { status: 500 });
   }
 }

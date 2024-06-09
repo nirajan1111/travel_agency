@@ -1,18 +1,14 @@
 "use client";
 import Link from "next/link";
 import Breadcrumb from "@/components/common/Breadcrumb";
-import Newslatter from "@/components/common/Newslatter";
 import Footer from "@/components/footer/Footer";
 import Header from "@/components/header/Header";
 import Topbar2 from "@/components/topbar/Topbar2";
 import { useEffect, useState } from "react";
 
-
-
-
 const page = ({ params: { id } }) => {
-    console.log(id);
-    console.log('this is so cool i am fine')
+    
+    
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -22,7 +18,7 @@ const page = ({ params: { id } }) => {
       const response = await fetch(`/api/blog/${id}`);
       const landingResponse = await response.json();
       
-      console.log("products data ", landingResponse.data);
+      
       setLoading(false);
       setData(landingResponse.data || []);
     };
@@ -49,7 +45,7 @@ const page = ({ params: { id } }) => {
           </div>
         </div>
       </div>
-      <Newslatter />
+
       <Footer />
     </>
   );

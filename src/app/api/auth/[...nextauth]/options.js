@@ -30,7 +30,7 @@ export const authOptions = {
                     return user
                 }
                 catch (err) {
-                    console.log(err)
+                    
                     throw new Error(err)
                 }
             }

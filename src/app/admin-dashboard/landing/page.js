@@ -12,7 +12,7 @@ const Page = () => {
       setLoading(true);
       const response = await fetch("/api/landing");
       const landingResponse = await response.json();
-      console.log("products data ", landingResponse.data);
+      
       setLoading(false);
       setLandingData(landingResponse.data || []);
     };
@@ -20,7 +20,7 @@ const Page = () => {
     fetchData();
   }, []);
   const LandingBody = ({data}) => {
-    console.log('landing body is ',data)
+    
     return (
       <tr>
         <td data-label="Heading">

@@ -12,7 +12,7 @@ const Page = () => {
       setLoading(true);
       const response = await fetch("/api/package");
       const packageResponse = await response.json();
-      console.log("products data ", packageResponse.data);
+      
       setLoading(false);
       setPackageData(packageResponse.data || []);
     };

@@ -14,7 +14,7 @@ export async function GET(req, res) {
     });
     return response;
   } catch (error) {
-    console.log(error.message);
+    
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
@@ -41,7 +41,7 @@ export async function POST(req, res) {
     });
     return response;
   } catch (error) {
-    console.log(error.message);
+    
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
@@ -50,18 +50,17 @@ export async function DELETE(req, res) {
   try {
     await connect();
     const { id } = await req.json();
-    const blog = await Blogs.findById(id);
+    const blog = await Blogs.findByIdAndDelete(id)
     if (!blog) {
       return NextResponse.json({ error: "Blog not found" }, { status: 404 });
     }
-    await blog.remove();
     const response = NextResponse.json({
       message: "Blog deleted successfully!",
       success: true,
     });
     return response;
   } catch (error) {
-    console.log(error.message);
+    
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
@@ -99,7 +98,7 @@ export async function PUT(req, res) {
     });
     return response;
   } catch (error) {
-    console.log(error.message);
+    
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

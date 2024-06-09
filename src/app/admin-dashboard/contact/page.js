@@ -9,25 +9,24 @@ const Page = () => {
     const fetchData = async () => {
       try{
       const response = await axios.get("/api/contact");
-      console.log("contact data ", response.data.data);
+
       setFormData(response.data.data || []);
       }
       catch(error){
-        console.log(error)
+        
       }
     }
     fetchData();
   }, []);
 
   const handleDelete = async (id) => {
-    console.log("id", id);
+
     try {
       const response = await axios.delete("/api/contact",{
         data: { id: id }
       });
-      console.log("response", response);
     } catch (error) {
-      console.log(error);
+      
     }
   }
 

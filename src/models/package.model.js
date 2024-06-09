@@ -4,7 +4,7 @@ const packageSchema = new mongoose.Schema({
   price: { type: String, required: true },
   duration: { type: String, required: true },
   activity: { type: String, required: true },
-  destination: { type: mongoose.Schema.Types.ObjectId, ref: "tours", required: true },
+  destination: { type: mongoose.Schema.Types.ObjectId, ref: "Tour", required: true },
   overview: { type: String, required: true },
   included: [{ type: String }],
   excluded: [{ type: String }],

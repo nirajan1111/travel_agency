@@ -1,8 +1,19 @@
 "use client";
 import React, { useState } from "react";
+import dynamic from "next/dynamic";
 
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+const CKEditor = dynamic(
+  () => import("@ckeditor/ckeditor5-react").then((mod) => mod.CKEditor),
+  { ssr: false } // This ensures it won't be server-side rendered
+);
+
+const ClassicEditor = dynamic(
+  () => import("@ckeditor/ckeditor5-build-classic"),
+  { ssr: false }
+);
+
+// import { CKEditor } from "@ckeditor/ckeditor5-react";
+// import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { UploadButton } from "@/uitils/uploadthing";
 const Page = () => {
   const [overview, setOverview] = useState("");
@@ -29,7 +40,7 @@ const Page = () => {
 
       const data = await response.json();
 
-      console.log("Upload response:", data); // Handle success/error messages
+   
     } catch (error) {
       console.error("Error uploading image:", error);
     }
@@ -90,7 +101,7 @@ const Page = () => {
                           endpoint="imageUploader"
                           onClientUploadComplete={(res) => {
                             // Do something with the response
-                            console.log("Files: ", res);
+                  
                             setFile(res[0].url);
                             setIsComplete(true);
                           }}

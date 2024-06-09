@@ -14,9 +14,15 @@ const Destination1 = () => {
     const fetchData = async () => {
       setLoading(true);
       const response = await axios.get("/api/destination");
-      console.log("destination data ", response.data.data);
+      
       setLoading(false);
-      setDestinationData(response.data.data || []);
+
+      if (response.data.data.length > 5) {
+        setDestinationData(response.data.data.slice(0, 5));
+      } else {
+        setDestinationData(response.data.data || []);
+
+      }
     };
     fetchData();
   }, []);
@@ -68,7 +74,7 @@ const Destination1 = () => {
           <div className="row g-4">
 
             {
-              destinationData.map((destination,index) => (
+              destinationData.map((destination, index) => (
                 (
 
                   <div className="col-lg-4 col-sm-6" key={index}>
@@ -80,12 +86,11 @@ const Destination1 = () => {
                       </div>
                       <div className="content">
                         <h4>
-                          <Link href="/destination/destination-details">
-                          {destination.name}
-                          </Link>
+                            {destination.name}
+                         
                         </h4>
                         <div className="eg-tag">
-                          <span>{destination.tourCount}</span>
+                          <span></span>
                         </div>
                       </div>
                     </div>

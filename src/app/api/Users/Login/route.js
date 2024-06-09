@@ -32,7 +32,7 @@ export async function POST(req) {
     }
     return NextResponse.json({ message: "User Logged In." }, { status: 201 });
   } catch (error) {
-    console.log(error);
+    
     return NextResponse.json({ message: "Error", error }, { status: 500 });
   }
 }

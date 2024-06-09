@@ -29,7 +29,6 @@ const RegisterForm = () => {
         router.push('/sign-in')
         setErrorMessage("Invalid email or password");
       }
-      console.log(signInResponse);
 
       if (!signInResponse.error) {
         router.push("/admin-dashboard");
@@ -41,7 +40,7 @@ const RegisterForm = () => {
 
     } catch (error) {
       router.push('/sign-in')
-      console.log(error);
+      
     }
   };
 

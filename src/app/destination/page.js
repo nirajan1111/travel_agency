@@ -14,7 +14,7 @@ const page = () => {
     const fetchData = async () => {
       setLoading(true);
       const response = await axios.get("/api/destination");
-      console.log("destination data ", response.data.data);
+      
       setLoading(false);
       setDestinationData(response.data.data || []);
     };
@@ -40,12 +40,11 @@ const page = () => {
                     </div>
                     <div className="content">
                       <h4>
-                        <Link href="/destination/destination-details">
                         {destination.name}
-                        </Link>
+                    
                       </h4>
                       <div className="eg-tag">
-                        <span>{destination.tourCount}</span>
+                        <span></span>
                       </div>
                     </div>
                   </div>

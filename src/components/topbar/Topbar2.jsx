@@ -19,12 +19,12 @@ const Topbar2 = () => {
           </div>
           <div className="content">
             <span>Email:</span>
-            <a href="mailto:ifo@example.com">info@example.com</a>
+            <a href="mailto:ifo@example.com">shuvam1travels10@gmail.com</a>
           </div>
         </div>
         <p>
           Hurry Up For your new Tour!{" "}
-          <a href="#">Book Your Tour</a>{" "}
+          <a href="package/package-category">Book Your Tour</a>{" "}
         </p>
         <div className="topbar-right">
           <div className="social-icon-area">

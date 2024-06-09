@@ -40,7 +40,7 @@ const Home1WhyChoose = () => {
                     />
                   </svg>
                 </span>
-                <h2>Why Choose TripRex</h2>
+                <h2>Why Choose Shuvam Travels</h2>
               </div>
             </div>
           </div>
@@ -59,10 +59,9 @@ const Home1WhyChoose = () => {
                   </svg>
                 </div>
                 <div className="feature-card-content">
-                  <h6>Worldwide Coverage</h6>
+                  <h6>wide Coverage</h6>
                   <p>
-                    Cras facilisis fermentum ex seda ullamcorper odio rutrum
-                    accoun Phasellus auctor
+                    Explore different corner of the nepal with our extensive network.
                   </p>
                 </div>
               </div>
@@ -83,8 +82,9 @@ const Home1WhyChoose = () => {
                 <div className="feature-card-content">
                   <h6>Competitive Pricing</h6>
                   <p>
-                    Burabitur convallis enim atnora ullamcorper sagittis. Morbi
-                    nug scelerisque for thana.
+                    Unlock unforgettable experiences at unbeatable prices.
+
+
                   </p>
                 </div>
               </div>
@@ -108,8 +108,9 @@ const Home1WhyChoose = () => {
                 <div className="feature-card-content">
                   <h6>Fast Booking</h6>
                   <p>
-                    Fermentum eitorx quis maximum Etiam luctus erat vulputate
-                    urnan posuere convallis.
+                    Book your adventure in seconds for instant peace of mind.
+
+
                   </p>
                 </div>
               </div>
@@ -131,8 +132,7 @@ const Home1WhyChoose = () => {
                 <div className="feature-card-content">
                   <h6>Guided Tours</h6>
                   <p>
-                    Pellentesque venenatis egestasoi diam Proin velgorat elit
-                    porttitor metus convallis.
+                    Discover the world's wonders with expert guides by your side.
                   </p>
                 </div>
               </div>
@@ -157,8 +157,9 @@ const Home1WhyChoose = () => {
                 <div className="feature-card-content">
                   <h6>Best Support 24/7</h6>
                   <p>
-                    Sed venenatis mauris nec nulla euismod, accounv varius
-                    lectus viverra oncen.
+                    We're here for you, day or night, to ensure smooth sailing.
+
+
                   </p>
                 </div>
               </div>
@@ -185,8 +186,9 @@ const Home1WhyChoose = () => {
                 <div className="feature-card-content">
                   <h6>Ultimate flexibility</h6>
                   <p>
-                    Duis leo sapien, lacinia utorrent efficitur utom suscipit
-                    quis nulla Sed auctor eu
+                    Tailor your journey effortlessly to suit your ever-changing plans.
+
+
                   </p>
                 </div>
               </div>

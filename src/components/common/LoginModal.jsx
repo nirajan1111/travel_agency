@@ -22,17 +22,17 @@ const LoginModal = () => {
 
   const handlesignupSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    
     try {
       const response = await axios.post("http://localhost:3000/api/Users", formData);
-      console.log(response.data);
+      
       if (response.data.success) {
         router.push("/");
       } else {
         setErrorMessage(response.data.message);
       }
     } catch (error) {
-      console.log(error);
+      
     }
 
   };
@@ -42,7 +42,7 @@ const LoginModal = () => {
   const handlesigninSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage("");
-    console.log("submitted", formData)
+    
     try {
       const signInResponse = await signIn("credentials", {
         email: formData.email,
@@ -50,11 +50,11 @@ const LoginModal = () => {
         callbackUrl: "/admin-dashboard",
       });
       if (signInResponse === null) {
-        console.log(signInResponse);
+        
         router.push('/')
         setErrorMessage("Invalid email or password");
       }
-      console.log(signInResponse);
+      
 
       if (!signInResponse.error) {
         router.push("/admin-dashboard");
@@ -66,7 +66,7 @@ const LoginModal = () => {
 
     } catch (error) {
       router.push('/')
-      console.log(error);
+      
     }
   };
 
@@ -86,10 +86,7 @@ const LoginModal = () => {
         >
           <div className="modal-dialog modal-dialog-centered">
             <div className="modal-content">
-              <div className="modal-clode-btn" data-bs-dismiss="modal" />
-              <div className="modal-header">
-                <img src="/assets/img/home1/login-modal-header-img.jpg" alt="" />
-              </div>
+
               <div className="modal-body">
                 <div className="login-registration-form">
                   <div className="form-title">
@@ -105,7 +102,7 @@ const LoginModal = () => {
                     <input value={formData.password} onChange={handlePasswordChange} type="password" placeholder="********" />
                   </div>
                   <div>
-                    <button onClick={() => setsignIn(!signInstatus)} style={{background:"inherit"}}>
+                    <button onClick={() => setsignIn(!signInstatus)} style={{ background: "inherit" }}>
                       {signInstatus ? "toggle it to Sign Up" : "toggle it to Sign In"}
                     </button>
                   </div>
@@ -127,7 +124,7 @@ const LoginModal = () => {
 
                   <input value="submit" type="submit" className="login-btn mb-25" />
 
-                 
+
                 </div>
               </div>
             </div>

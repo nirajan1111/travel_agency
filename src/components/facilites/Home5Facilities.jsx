@@ -14,9 +14,8 @@ export const TourDetails = ({ data }) => {
     <div className="col-lg-4 col-md-6">
       <div className="package-card3 style-5">
         <div className="package-card-img">
-          <Link href="/package/package-details">
             <img src={data.image} alt="" />
-          </Link>
+          
 
           <div className="location">
             <svg
@@ -29,7 +28,7 @@ export const TourDetails = ({ data }) => {
             </svg>
             <ul className="locations-list">
               <li>
-                <Link href="/package">{data.destination}</Link>
+               {data.destination.name}
               </li>
             </ul>
           </div>
@@ -37,7 +36,7 @@ export const TourDetails = ({ data }) => {
         <div className="package-card-content">
           <div className="card-content-top">
             <h5>
-              <Link href="/package/package-details">{data.heading}</Link>
+             {data.heading}
             </h5>
           </div>
           <div className="card-content-bottom">

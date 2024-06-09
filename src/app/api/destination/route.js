@@ -23,7 +23,7 @@ export async function GET(req, res) {
     });
     return response;
   } catch (error) {
-    console.log(error.message);
+    
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
@@ -33,8 +33,8 @@ export async function POST(req, res) {
     await connect();
 
     const { name, image } = await req.json();
-    console.log("name is ", name);
-    console.log("image is ", image);
+    
+    
 
     const destination = new Destination({
       name,
@@ -49,7 +49,7 @@ export async function POST(req, res) {
     });
     return response;
   } catch (error) {
-    console.log(error.message);
+    
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
@@ -72,7 +72,7 @@ export async function DELETE(req, res) {
     });
     return response;
   } catch (error) {
-    console.log(error.message);
+    
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
@@ -99,7 +99,7 @@ export async function PUT(req, res) {
     });
     return response;
   } catch (error) {
-    console.log(error.message);
+    
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

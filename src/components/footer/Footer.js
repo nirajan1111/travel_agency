@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 
-const Footer = ({style}) => {
+const Footer = ({ style }) => {
   return (
     <footer className={`footer-section ${style}`}>
       <div className="container">
@@ -11,17 +11,17 @@ const Footer = ({style}) => {
               <div className="footer-widget">
                 <div className="footer-logo">
                   <Link href="/">
-                    <img src="/assets/img/logo2.svg" alt="" />
+                    <img src="/assets/img/rsz_logobg.png" alt="" width={180} />
                   </Link>
                 </div>
                 <h3>
-                  Want
+                  Want {" "}
                   <span>
                     to Take <br />
                   </span>
                   Tour Packages<span>?</span>
                 </h3>
-                <Link href="/package" className="primary-btn1">
+                <Link href="/package/package-category" className="primary-btn1">
                   Book A Tour
                 </Link>
               </div>
@@ -42,7 +42,9 @@ const Footer = ({style}) => {
                     <Link href="/package/package-category">Tour Package</Link>
                   </li>
                   <li>
-                    <Link href="/blog-grid">Article</Link>
+                  <Link href="/blog">Blogs</Link>
+                </li>
+                  <li>
                   </li>
                 </ul>
               </div>
@@ -63,7 +65,7 @@ const Footer = ({style}) => {
                     </svg>
                     <h5>More Inquiry</h5>
                   </div>
-                  <a href="tel:999858624984">+999-858 624 984</a>
+                  <a href="tel:+977 9810955776">+977 9810955776</a>
                 </div>
                 <div className="single-contact mb-35">
                   <div className="widget-title">
@@ -79,7 +81,7 @@ const Footer = ({style}) => {
                     </svg>
                     <h5>Send Mail</h5>
                   </div>
-                  <a href="mailto:info@example.com">info@example.com</a>
+                  <a href="mailto:shuvam1travels10@gmail.com">shuvam1travels10@gmail.com</a>
                 </div>
                 <div className="single-contact">
                   <div className="widget-title">
@@ -96,8 +98,7 @@ const Footer = ({style}) => {
                     <h5>Address</h5>
                   </div>
                   <a href="https://www.google.com/maps/place/Egens+Lab/@23.8340712,90.3631117,17z/data=!3m1!4b1!4m6!3m5!1s0x3755c14c8682a473:0xa6c74743d52adb88!8m2!3d23.8340663!4d90.3656866!16s%2Fg%2F11rs9vlwsk?entry=ttu">
-                    House 168/170, Avenue 01, Mirpur <br /> DOHS, Dhaka
-                    Bangladesh
+                    Thamel , Nepal
                   </a>
                 </div>
               </div>
@@ -108,44 +109,12 @@ const Footer = ({style}) => {
                   <h5>We Are Here</h5>
                 </div>
                 <p>
-                  Quisque purus augue, facilisis andi neque idont accumsan
-                  fringilla massa. Vivamusol id nibhom condimentum.
+                  We are here to provide you the best service and make your trip memorable.
                 </p>
                 <div className="payment-partner">
                   <div className="widget-title">
-                    <h5>Payment Partner</h5>
                   </div>
-                  <div className="icons">
-                    <ul>
-                      <li>
-                        <img
-                          src="/assets/img/home1/icon/visa-logo.svg"
-                          alt=""
-                        />
-                      </li>
-                      <li>
-                        <img
-                          src="/assets/img/home1/icon/stripe-logo.svg"
-                          alt=""
-                        />
-                      </li>
-                      <li>
-                        <img
-                          src="/assets/img/home1/icon/paypal-logo.svg"
-                          alt=""
-                        />
-                      </li>
-                      <li>
-                        <img src="/assets/img/home1/icon/woo-logo.svg" alt="" />
-                      </li>
-                      <li>
-                        <img
-                          src="/assets/img/home1/icon/skrill-logo.svg"
-                          alt=""
-                        />
-                      </li>
-                    </ul>
-                  </div>
+
                 </div>
               </div>
             </div>
@@ -186,7 +155,7 @@ const Footer = ({style}) => {
                 </li>
               </ul>
               <p>
-                ©Copyright 2023 TripRex | Design By{" "}
+                ©Copyright 2023 Developed By{" "}
                 NebulaLeap Technology
               </p>
               <div className="footer-right">

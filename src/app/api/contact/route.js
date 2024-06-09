@@ -9,7 +9,7 @@ export  async function POST(req, res) {
     await connect()
 
         const { name, email, phone, message } = await req.json();
-        console.log(name, email, phone, message);
+        
     
         if (!name || !email || !message) {
 
@@ -43,8 +43,8 @@ export async function DELETE(req, res) {
 
 
     const { id } =await req.json();
-    console.log(id)
-    console.log(req)
+    
+    
     await Contact.findByIdAndDelete(id);
     return NextResponse.json({ message: 'Contact deleted successfully' });
   }

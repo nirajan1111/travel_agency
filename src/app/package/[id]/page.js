@@ -9,21 +9,57 @@ import DatePicker from "react-datepicker";
 
 
 import "react-datepicker/dist/react-datepicker.css";
-import Newslatter from "@/components/common/Newslatter";
 import Footer from "@/components/footer/Footer";
 import Header from "@/components/header/Header";
 import Topbar from "@/components/topbar/Topbar2";
+import axios from "axios";
 const Page = ({ params: { id } }) => {
-  const [inquiry,setInquiry] = useState({
+  const [inquiry, setInquiry] = useState({
     name: "",
     email: "",
     number: "",
     message: "",
     id: id,
   })
+  const [booking, setBooking] = useState({
+    name: "",
+    email: "",
+    passport: "",
+    phone: "",
+    persons: "",
+    arrival: "",
+    for_: "",
+    id: id,
+  })
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setBooking(prevBooking => ({
+      ...prevBooking,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (booking.name && booking.email && booking.passport) {
+      const response = axios.post("/api/booking", booking);
+      
+      setBooking({
+        name: "",
+        email: "",
+        passport: "",
+        phone: "",
+        persons: "",
+        arrival: "",
+        for_: "",
+        id: id,
+      })
+    } else {
+    }
+  };
   const handleSubmitInquiry = async (e) => {
     e.preventDefault();
-    console.log("inquiry", inquiry);
+    
     try {
       const response = await fetch("/api/inquiry", {
         method: "POST",
@@ -31,9 +67,9 @@ const Page = ({ params: { id } }) => {
         body: JSON.stringify(inquiry),
       });
       const data = await response.json();
-      console.log("inquiry data", data);
+      
     } catch (error) {
-      console.log(error);
+      
     }
   };
 
@@ -76,7 +112,7 @@ const Page = ({ params: { id } }) => {
       setLoading(true);
       const response = await fetch(`/api/package/${id}`);
       const landingResponse = await response.json();
-      console.log("products data ", landingResponse.data);
+      
       setLoading(false);
       setData(landingResponse.data || []);
     };
@@ -233,8 +269,8 @@ const Page = ({ params: { id } }) => {
                   </div>
                 ))}
               </div>
-             
-             
+
+
             </div>
             <div className="col-xl-4">
               <div className="booking-form-wrap mb-40">
@@ -279,14 +315,18 @@ const Page = ({ params: { id } }) => {
                     <div className="sidebar-booking-form">
                       <div className="tour-date-wrap mb-50">
                         <h6>Select Your Booking Date:</h6>
-                        <form>
+                        <form onSubmit={handleSubmit}>
                           <div className="form-inner mb-20">
                             <label>
                               Full Name <span>*</span>
                             </label>
                             <input
                               type="text"
+                              name="name"
+                              value={booking.name}
+                              onChange={handleChange}
                               placeholder="Enter your full name"
+                              required
                             />
                           </div>
                           <div className="form-inner mb-20">
@@ -295,7 +335,11 @@ const Page = ({ params: { id } }) => {
                             </label>
                             <input
                               type="email"
+                              name="email"
+                              value={booking.email}
+                              onChange={handleChange}
                               placeholder="Enter your email address"
+                              required
                             />
                           </div>
                           <div className="form-inner mb-20">
@@ -304,7 +348,11 @@ const Page = ({ params: { id } }) => {
                             </label>
                             <input
                               type="text"
+                              name="passport"
+                              value={booking.passport}
+                              onChange={handleChange}
                               placeholder="Enter your passport ID"
+                              required
                             />
                           </div>
                           <div className="form-inner mb-20">
@@ -313,29 +361,51 @@ const Page = ({ params: { id } }) => {
                             </label>
                             <input
                               type="text"
+                              name="phone"
+                              value={booking.phone}
+                              onChange={handleChange}
                               placeholder="Enter your phone number"
+
                             />
                           </div>
                           <div className="form-inner mb-20">
                             <label>
-                              Number of persons:<span></span>
+                              Number of persons:<span>*</span>
                             </label>
                             <input
                               type="number"
+                              name="persons"
+                              value={booking.persons}
+                              onChange={handleChange}
                               placeholder="Enter number of persons"
+
                             />
                           </div>
                           <div className="form-inner mb-20">
                             <label>
-                              Arrival date<span></span>
+                              Arrival date<span>*</span>
                             </label>
-                            <input type="date" placeholder="Arrival Date" />
+                            <input
+                              type="date"
+                              name="arrival"
+                              value={booking.arrival}
+                              onChange={handleChange}
+                              placeholder="Arrival Date"
+
+                            />
                           </div>
                           <div className="form-inner mb-20">
                             <label>
-                              For date<span></span>
+                              For date<span>*</span>
                             </label>
-                            <input type="date" placeholder="For Date" />
+                            <input
+                              type="date"
+                              name="for_"
+                              value={booking.for_}
+                              onChange={handleChange}
+                              placeholder="For Date"
+
+                            />
                           </div>
                           <div className="total-price">
                             <span>Total Price:</span> $470
@@ -344,6 +414,7 @@ const Page = ({ params: { id } }) => {
                             Book Now
                           </button>
                         </form>
+
                       </div>
                     </div>
                   </div>

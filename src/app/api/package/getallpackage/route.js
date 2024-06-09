@@ -8,7 +8,7 @@ export async function GET(req, res) {
       const response = NextResponse.json(Packages);
       return response;
     } catch (error) {
-      console.log(error.message);
+      
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
   }

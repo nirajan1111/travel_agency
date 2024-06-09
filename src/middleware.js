@@ -7,7 +7,7 @@ export default withAuth(
     callbacks: {
       authorized: ({ req, token }) => {
         if (req.nextUrl.pathname === '/admin-dashboard') {
-          console.log(token)
+
           return token?.isAdmin
         }
       }

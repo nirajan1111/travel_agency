@@ -20,13 +20,13 @@ const Banner1 = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get("/api/landing");
-        console.log("response", response);  
+        
         const data = response.data.data;
-        console.log("landing data ", data);
+        
         setLandings(data || []);
         setLoading(false);
       } catch (error) {
-        console.log(error);
+        
         setError(true);
         setLoading(false);
       }

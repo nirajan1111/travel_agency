@@ -18,7 +18,7 @@ const Page = () => {
       name: name,
       image: file,
     };
-    console.log(bodyJson)
+    
 
     try {
       const response = await fetch("/api/destination", {
@@ -30,7 +30,7 @@ const Page = () => {
       const data = await response.json();
       
 
-      console.log("Upload response:", data); // Handle success/error messages
+      
     } catch (error) {
       console.error("Error uploading image:", error);
     }
@@ -77,7 +77,7 @@ const Page = () => {
                           endpoint="imageUploader"
                           onClientUploadComplete={(res) => {
                             // Do something with the response
-                            console.log("Files: ", res);
+                            
                             setFile(res[0].url);
                             setIsComplete(true);
                           }}

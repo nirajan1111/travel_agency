@@ -77,7 +77,7 @@ const Header = () => {
     const fetchData = async () => {
       setLoading(true);
       const response = await axios.get("/api/destination");
-      console.log("destination data ", response.data.data);
+      
       setLoading(false);
       setDestinationData(response.data.data || []);
     };
@@ -167,19 +167,19 @@ const Header = () => {
       >
         <div className="header-logo d-lg-none d-flex">
           <Link href="/">
-            <img alt="image" className="img-fluid" src="/assets/img/logo.svg" />
+            <img alt="image" className="img-fluid" src="/assets/img/rsz_logobg.png"  width={120}/>
           </Link>
         </div>
         <div className="company-logo d-lg-flex d-none">
           <Link href="/">
-            <img src="/assets/img/logo.svg" alt="" />
+            <img src="/assets/img/rsz_logobg.png" alt=""  width={120}/>
           </Link>
         </div>
         <div className={`main-menu ${state.isSidebarOpen ? "show-menu" : ""}`}>
           <div className="mobile-logo-area d-lg-none d-flex justify-content-between align-items-center">
             <div className="mobile-logo-wrap">
               <Link href="/">
-                <img alt="image" src="/assets/img/logo.svg" />
+                <img alt="image" src="/assets/img/logobg.png" />
               </Link>
             </div>
             <div className="menu-close-btn" onClick={toggleSidebar}>
@@ -295,7 +295,7 @@ const Header = () => {
             <div className="content">
               <span>To More Inquiry</span>
               <h6>
-                <a href="tel:+990737621432">+990-737 621 432</a>
+                <a href="tel:+977 9810955776">+977 9810955776</a>
               </h6>
             </div>
           </div>
@@ -363,7 +363,7 @@ const Header = () => {
             <div className="content">
               <span>To More Inquiry</span>
               <h6>
-                <a href="tel:+990737621432">+990-737 621 432</a>
+                <a href="tel:+977 9810955776">+977 9810955776</a>
               </h6>
             </div>
           </div>
@@ -390,7 +390,7 @@ const Header = () => {
         <div className="sidebar-logo-area d-flex justify-content-between align-items-center">
           <div className="sidebar-logo-wrap">
             <Link href="/">
-              <img alt="image" src="/assets/img/logo.svg" />
+              <img alt="image" src="/assets/img/rsz_logobg.png" width={120} />
             </Link>
           </div>
           <div className="right-sidebar-close-btn" onClick={toggleRightSidebar}>
@@ -483,7 +483,7 @@ const Header = () => {
             <div className="content">
               <span>To More Inquiry</span>
               <h6>
-                <a href="tel:+990737621432">+990-737 621 432</a>
+                <a href="tel:+977 9810955776">+977 9810955776</a>
               </h6>
             </div>
           </div>
@@ -503,7 +503,7 @@ const Header = () => {
             <div className="content">
               <span>Email:</span>
               <h6>
-                <a href="mailto:info@gmail.com">info@gmail.com</a>
+                <a href="mailto:shuvam1travels10@gmail.com">shuvam1travels10@gmail.com</a>
               </h6>
             </div>
           </div>

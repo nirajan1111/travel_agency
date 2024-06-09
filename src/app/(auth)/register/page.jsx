@@ -20,17 +20,17 @@ const RegisterForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+
     try {
         const response = await axios.post("http://localhost:3000/api/Users", formData);
-        console.log(response.data);
+  
         if (response.data.success) {
           router.push("/");
         } else {
           setErrorMessage(response.data.message);
         }
       } catch (error) {
-        console.log(error);
+        
       }
    
   };
